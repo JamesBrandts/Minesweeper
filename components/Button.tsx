@@ -18,17 +18,19 @@ export default function Button(props) {
           (props.index % 10) * 20
         }px`,
       }}
-      onClick={() => {
+      onClick={async () => {
         props.setArr(Reveal(props.arr,props.index));
         if(props.result === ''){
-          if (content === '💣'){
-            props.setResult('LOST');
-            Lose()
-            props.setArr(RevealAll(props.arr));
-          }
           if(props.arr.filter(i=>i.revealed).length >=85){
             props.setResult('WON');
             Win()
+            await new Promise(r => setTimeout(r, 1000));
+            props.setArr(RevealAll(props.arr));
+          }
+          if (content === '💣'){
+            props.setResult('LOST');
+            Lose()
+            await new Promise(r => setTimeout(r, 1000));
             props.setArr(RevealAll(props.arr));
           }
         }
@@ -41,4 +43,5 @@ export default function Button(props) {
     </div>
   );
 }
+
 
