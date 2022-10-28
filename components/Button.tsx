@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Lose from './Lose';
 import Reveal from './Reveal';
+import RevealAll from './RevealAll';
 import Win from './Win';
 
 export default function Button(props) {
@@ -20,8 +21,16 @@ export default function Button(props) {
       onClick={() => {
         props.setArr(Reveal(props.arr,props.index));
         if(props.result === ''){
-          if (content === '💣'){props.setResult('LOST');Lose()}
-          if(props.arr.filter(i=>i.revealed).length >=85){props.setResult('WIN');Win()}
+          if (content === '💣'){
+            props.setResult('LOST');
+            Lose()
+            props.setArr(RevealAll(props.arr));
+          }
+          if(props.arr.filter(i=>i.revealed).length >=85){
+            props.setResult('WON');
+            Win()
+            props.setArr(RevealAll(props.arr));
+          }
         }
       }}
       className={
