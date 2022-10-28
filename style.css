@@ -44,3 +44,7 @@ h1{
   transform: translate(-50%);
   color:#ddd;
 }
+
+.revealed{
+  box-shadow: 0 0 0 1px #aaa;
+}
