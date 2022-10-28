@@ -19,8 +19,10 @@ export default function Button(props) {
       }}
       onClick={() => {
         props.setArr(Reveal(props.arr,props.index));
-        if(props.arr.filter(i=>i.revealed).length >=85)Win();
-        if (content === '💣') Lose();
+        if(props.result === ''){
+          if (content === '💣'){props.setResult('LOST');Lose()}
+          if(props.arr.filter(i=>i.revealed).length >=85){props.setResult('WIN');Win()}
+        }
       }}
       className={
         props.arr[props.index].revealed ? 'btn revealed' : marked ? 'btn hidden marked' : 'btn hidden'
